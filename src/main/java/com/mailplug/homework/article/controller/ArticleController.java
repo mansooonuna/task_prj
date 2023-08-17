@@ -1,6 +1,7 @@
 package com.mailplug.homework.article.controller;
 
 import com.mailplug.homework.article.dto.ArticleRequestDto;
+import com.mailplug.homework.article.entity.Board;
 import com.mailplug.homework.article.service.ArticleService;
 import com.mailplug.homework.util.Message;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class ArticleController {
     private final ArticleService articleService;
 
-    // 게시판에 속한 게시글 목록 조회
-    @GetMapping
-    public ResponseEntity<Message> getArticlesList(@PageableDefault(size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
-        return articleService.getArticles(pageable);
+    // 선택한 게시판에 속한 게시글 목록 조회 & 게시글 제목 검색
+    @PostMapping
+    public ResponseEntity<Message> getArticlesList(@RequestParam(required = false) Board name,
+                                                   @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
+                                                   @RequestParam(required = false) String searchKeyword) {
+        return articleService.getArticles(name, pageable, searchKeyword);
     }
 
     // 게시글 단건 조회

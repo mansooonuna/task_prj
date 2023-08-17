@@ -2,6 +2,7 @@ package com.mailplug.homework.article.service;
 
 import com.mailplug.homework.article.dto.ArticleRequestDto;
 import com.mailplug.homework.article.entity.Article;
+import com.mailplug.homework.article.entity.Board;
 import com.mailplug.homework.article.exception.CustomException;
 import com.mailplug.homework.article.repository.ArticleRepository;
 import com.mailplug.homework.util.Message;
@@ -24,12 +25,22 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     // 게시물 목록 조회
-    public ResponseEntity<Message> getArticles(Pageable pageable) {
-        Page<Article> articleList = articleRepository.findAll(pageable);
-        if (articleList.isEmpty()) {
-            return new ResponseEntity<>(new Message("게시글 전체 목록 조회 성공 - 게시글 없음", articleList), HttpStatus.OK);
+    public ResponseEntity<Message> getArticles(Board name, Pageable pageable, String searchKeyword) {
+        Page<Article> articleList;
+
+        // 게시판 선택하지 않으면 기본 게시판 글을 조회한다
+        if (name == null) name = Board.MAIN;
+
+        if (searchKeyword == null) {
+            articleList = articleRepository.findAllByBoard(name, pageable);
+        } else {
+            articleList = articleRepository.findAllByBoardAndSearchKeyword(name, searchKeyword, pageable);
         }
-        return new ResponseEntity<>(new Message("게시글 전체 목록 조회 성공", articleList), HttpStatus.OK);
+
+        if (articleList.isEmpty()) {
+            return new ResponseEntity<>(new Message("게시글 목록 조회 성공 - 게시글 없음", articleList), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new Message("게시글 목록 조회 성공", articleList), HttpStatus.OK);
     }
 
     // 게시물 단건 조회
