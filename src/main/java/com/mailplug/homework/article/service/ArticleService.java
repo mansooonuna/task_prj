@@ -45,9 +45,7 @@ public class ArticleService {
 
     // 게시물 단건 조회
     public ResponseEntity<Message> getArticle(Long articleId) {
-        Article article = articleRepository.findById(articleId).orElseThrow(
-                () -> new CustomException(ARTICLE_NOT_FOUND)
-        );
+        Article article = findArticle(articleId);
         return new ResponseEntity<>(new Message("게시글 단건 조회 성공", article), HttpStatus.OK);
     }
 
@@ -56,8 +54,11 @@ public class ArticleService {
     public ResponseEntity<Message> addArticle(String userId, ArticleRequestDto requestDto) {
         String title = requestDto.getTitle();
         String contents = requestDto.getContents();
+        Board board = requestDto.getBoard();
 
-        Article article = Article.builder().title(title).contents(contents).userId(userId).build();
+        if (board == null) board = Board.MAIN;
+
+        Article article = Article.builder().title(title).contents(contents).name(board).userId(userId).build();
         articleRepository.save(article);
         return new ResponseEntity<>(new Message("게시글 등록 성공", article), HttpStatus.OK);
     }
@@ -65,9 +66,7 @@ public class ArticleService {
     // 게시글 수정
     @Transactional
     public ResponseEntity<Message> updateArticle(Long articleId, String userId, ArticleRequestDto requestDto) {
-        Article article = articleRepository.findById(articleId).orElseThrow(
-                () -> new CustomException(ARTICLE_NOT_FOUND)
-        );
+        Article article = findArticle(articleId);
         if (!article.getUserId().equals(userId)) throw new CustomException(NOT_AUTHORIZED_USER);
 
         String title = requestDto.getTitle();
@@ -79,11 +78,18 @@ public class ArticleService {
     // 게시글 삭제
     @Transactional
     public ResponseEntity<Message> deleteArticle(Long articleId, String userId) {
-        Article article = articleRepository.findById(articleId).orElseThrow(
-                () -> new CustomException(ARTICLE_NOT_FOUND)
-        );
+        Article article = findArticle(articleId);
+
         if (!article.getUserId().equals(userId)) throw new CustomException(NOT_AUTHORIZED_USER);
         articleRepository.deleteById(article.getId());
         return new ResponseEntity<>(new Message("게시글 삭제 성공", null), HttpStatus.OK);
+    }
+
+
+    // Method
+    private Article findArticle(Long articleId) {
+        return articleRepository.findById(articleId).orElseThrow(
+                () -> new CustomException(ARTICLE_NOT_FOUND)
+        );
     }
 }
