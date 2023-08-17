@@ -17,9 +17,9 @@ import java.time.LocalDateTime;
 public class Timestamped {
     @CreatedDate
     @JsonFormat(pattern = "yy-MM-dd")
-    private LocalDateTime create_at;
+    private LocalDateTime createAt;
 
     @LastModifiedDate
     @JsonFormat(pattern = "yy-MM-dd")
-    private LocalDateTime update_at;
+    private LocalDateTime updateAt;
 }
