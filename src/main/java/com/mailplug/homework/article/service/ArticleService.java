@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-import static com.mailplug.homework.article.exception.ErrorCode.ARTICLE_NOT_FOUND;
-import static com.mailplug.homework.article.exception.ErrorCode.NOT_AUTHORIZED_USER;
+import static com.mailplug.homework.article.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -49,13 +48,15 @@ public class ArticleService {
         return new ResponseEntity<>(new Message("게시글 단건 조회 성공", article), HttpStatus.OK);
     }
 
-    // 게시물 등록
+    // 게시글 등록
     @Transactional
     public ResponseEntity<Message> addArticle(String userId, ArticleRequestDto requestDto) {
         String title = requestDto.getTitle();
         String contents = requestDto.getContents();
         Board board = requestDto.getBoard();
 
+        if (title == null) throw new CustomException(NON_TITLE);
+        if (contents == null) throw new CustomException(NON_CONTENT);
         if (board == null) board = Board.MAIN;
 
         Article article = Article.builder().title(title).contents(contents).name(board).userId(userId).build();
