@@ -22,10 +22,10 @@ public class Article extends Timestamped {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Board name;
+    private Board name = Board.MAIN;
 
     @Column(nullable = false)
-    @Size(max = 10, message = "글의 제목은 10자 이하로 작성해주세요.")
+    @Size(max = 100, message = "글의 제목은 100자 이내로 작성해주세요.")
     private String title;
 
     @Column(columnDefinition = "text")

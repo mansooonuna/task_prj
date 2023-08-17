@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum Board {
-    NOTICE("NOTICE"), FREE("FREE");
+    NOTICE("NOTICE"), FREE("FREE"), MAIN("MAIN");
 
     private final String board;
 }
