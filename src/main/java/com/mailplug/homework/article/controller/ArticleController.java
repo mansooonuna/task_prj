@@ -18,9 +18,9 @@ public class ArticleController {
     private final ArticleService articleService;
 
     // 선택한 게시판에 속한 게시글 목록 조회 & 게시글 제목 검색
-    @PostMapping
+    @GetMapping
     public ResponseEntity<Message> getArticlesList(@RequestParam(required = false) Board name,
-                                                   @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
+                                                   @PageableDefault(size = 10, sort = "createAt", direction = Sort.Direction.DESC) Pageable pageable,
                                                    @RequestParam(required = false) String searchKeyword) {
         return articleService.getArticles(name, pageable, searchKeyword);
     }
