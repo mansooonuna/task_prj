@@ -6,6 +6,7 @@ import com.mailplug.homework.article.exception.CustomException;
 import com.mailplug.homework.article.repository.ArticleRepository;
 import com.mailplug.homework.util.Message;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,18 +24,20 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     // 게시물 목록 조회
-    @Transactional
     public ResponseEntity<Message> getArticles(Pageable pageable) {
-        return null;
+        Page<Article> articleList = articleRepository.findAll(pageable);
+        if (articleList.isEmpty()) {
+            return new ResponseEntity<>(new Message("게시글 전체 목록 조회 성공 - 게시글 없음", articleList), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new Message("게시글 전체 목록 조회 성공", articleList), HttpStatus.OK);
     }
 
     // 게시물 단건 조회
-    @Transactional
     public ResponseEntity<Message> getArticle(Long articleId) {
         Article article = articleRepository.findById(articleId).orElseThrow(
                 () -> new CustomException(ARTICLE_NOT_FOUND)
         );
-        return new ResponseEntity<>(new Message("게시글 단건 조회 완료", article), HttpStatus.OK);
+        return new ResponseEntity<>(new Message("게시글 단건 조회 성공", article), HttpStatus.OK);
     }
 
     // 게시물 등록
