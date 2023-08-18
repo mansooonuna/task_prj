@@ -55,13 +55,13 @@ public class ArticleService {
     public ResponseEntity<Message> addArticle(String userId, ArticleRequestDto requestDto) {
         String title = requestDto.getTitle();
         String contents = requestDto.getContents();
-        Board board = requestDto.getBoard();
+        Board name = requestDto.getName();
 
-        if (title == null) throw new CustomException(NON_TITLE);
-        if (contents == null) throw new CustomException(NON_CONTENT);
-        if (board == null) board = Board.MAIN;
+        if (title == null || title.equals("")) throw new CustomException(NON_TITLE);
+        if (contents == null || contents.equals("")) throw new CustomException(NON_CONTENT);
+        if (name == null) name = Board.MAIN;
 
-        Article article = Article.builder().title(title).contents(contents).name(board).userId(userId).build();
+        Article article = Article.builder().title(title).contents(contents).name(name).userId(userId).build();
         articleRepository.save(article);
         return new ResponseEntity<>(new Message("게시글 등록 성공", article), HttpStatus.OK);
     }
