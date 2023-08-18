@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Article Controller 테스트")
+@DisplayName("Article Controller 테스트 - POST, PUT, DELETE")
 class ArticleControllerTest {
     @Mock
     private ArticleService articleService;

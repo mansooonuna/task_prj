@@ -5,14 +5,15 @@ import com.mailplug.homework.article.entity.Board;
 import com.mailplug.homework.article.service.ArticleService;
 import com.mailplug.homework.util.Message;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -27,7 +28,7 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Article Controller 테스트")
+@DisplayName("Article Controller 테스트 - GET")
 class ArticleGetControllerTest {
     @Mock
     private ArticleService articleService;
@@ -38,31 +39,34 @@ class ArticleGetControllerTest {
 
     @BeforeEach
     public void setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(articleController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(articleController)
+                .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
+                .build();
     }
 
     Article article = Article.builder().id(1L).title("title").contents("contents").name(Board.MAIN).userId("userId").build();
 
-    @Disabled("구현 중")
     @DisplayName("[GET] 게시글 목록 조회 성공 테스트")
     @Test
     void getArticlesList() throws Exception {
         // Given
-        Pageable pageable = PageRequest.of(0, 10, Sort.Direction.DESC, "createAt");
-        List<Article> list = new ArrayList<>();
-        Page<Article> articleList = new PageImpl<>(list);
+        List<Article> articleList = new ArrayList<>();
         Message expectedMessage = new Message("게시글 목록 조회 성공 - 게시글 없음", articleList);
 
-        when(articleService.getArticles(eq(null), eq(pageable), eq(null))).thenReturn(ResponseEntity.ok(expectedMessage));
+        when(articleService.getArticles(any(Board.class), any(Pageable.class), anyString())).thenReturn(ResponseEntity.ok(expectedMessage));
 
         // When
-        mockMvc.perform(MockMvcRequestBuilders.get("/articles"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/articles")
+                        .param("name", "MAIN")
+                        .param("searchKeyword", "키워드")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(expectedMessage.getMessage()));
 
         // Then
-        verify(articleService, times(1)).getArticles(eq(null), eq(pageable), eq(null));
+        verify(articleService, times(1)).getArticles(eq(Board.MAIN), any(Pageable.class), eq("키워드"));
     }
+
 
     @DisplayName("[GET] 게시글 단건 조회 성공 테스트")
     @Test
