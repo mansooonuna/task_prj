@@ -30,11 +30,13 @@ public class GlobalExceptionHandler {
         }
         return ErrorResponse.toResponseEntityValid(sb.toString(), HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e){
         e.printStackTrace();
         return ErrorResponse.toResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
     }
+
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e){
         e.printStackTrace();

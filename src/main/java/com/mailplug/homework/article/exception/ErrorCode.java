@@ -15,6 +15,6 @@ public enum ErrorCode {
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND,"해당 게시글이 존재하지 않습니다." );
 
     private final HttpStatus httpStatus;
-    private final String detail;
+    private final String data;
 
 }
