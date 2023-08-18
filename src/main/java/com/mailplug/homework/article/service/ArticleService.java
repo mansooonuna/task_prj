@@ -45,8 +45,10 @@ public class ArticleService {
     }
 
     // 게시물 단건 조회
+    @Transactional
     public ResponseEntity<Message> getArticle(Long articleId) {
         Article article = findArticle(articleId);
+        article.viewCount(article.getViews());
         return new ResponseEntity<>(new Message("게시글 단건 조회 성공", article), HttpStatus.OK);
     }
 

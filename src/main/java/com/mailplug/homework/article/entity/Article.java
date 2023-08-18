@@ -34,8 +34,16 @@ public class Article extends Timestamped {
     @Column(nullable = false)
     private String userId;
 
+    @Column
+    @Builder.Default
+    private Long views = 0L;
+
     public void update(String title, String contents) {
         this.title = title;
         this.contents = contents;
+    }
+
+    public void viewCount(Long view) {
+        this.views = view + 1;
     }
 }
