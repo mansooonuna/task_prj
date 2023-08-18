@@ -25,7 +25,7 @@ public class Article extends Timestamped {
     private Board name = Board.MAIN;
 
     @Column(nullable = false)
-    @Size(max = 100, message = "글의 제목은 100자 이내로 작성해주세요.")
+    @Size(max = 100)
     private String title;
 
     @Column(columnDefinition = "text")

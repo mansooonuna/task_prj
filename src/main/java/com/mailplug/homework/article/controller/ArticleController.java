@@ -11,6 +11,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/articles")
@@ -34,7 +36,7 @@ public class ArticleController {
     // 게시글 등록
     @PostMapping("/add")
     public ResponseEntity<Message> addArticle(@RequestHeader(name = "X-USERID") String userId,
-                                              @RequestBody ArticleRequestDto requestDto) {
+                                              @Valid @RequestBody ArticleRequestDto requestDto) {
         return articleService.addArticle(userId, requestDto);
     }
 
@@ -42,7 +44,7 @@ public class ArticleController {
     @PutMapping("/{articleId}")
     public ResponseEntity<Message> updateArticle(@PathVariable Long articleId,
                                                  @RequestHeader(name = "X-USERID") String userId,
-                                                 @RequestBody ArticleRequestDto requestDto) {
+                                                 @Valid @RequestBody ArticleRequestDto requestDto) {
         return articleService.updateArticle(articleId, userId, requestDto);
     }
 
