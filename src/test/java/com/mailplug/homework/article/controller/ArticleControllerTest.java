@@ -41,7 +41,7 @@ class ArticleControllerTest {
     }
 
     Article article = Article.builder().id(1L).title("title").contents("contents").name(Board.MAIN).userId("userId").build();
-    ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").contents("내용").board(Board.MAIN).build();
+    ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").contents("내용").name(Board.MAIN).build();
 
     @DisplayName("[POST] 게시글 등록 성공 테스트")
     @Test

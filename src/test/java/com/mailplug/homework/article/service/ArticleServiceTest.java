@@ -44,7 +44,7 @@ class ArticleServiceTest {
         @Test
         void addArticle() {
             // Given
-            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").contents("내용").board(Board.FREE).build();
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").contents("내용").name(Board.FREE).build();
 
             // When
             ResponseEntity<Message> response = articleService.addArticle("testUser", articleRequestDto);
@@ -58,7 +58,7 @@ class ArticleServiceTest {
         @Test
         void addArticle_mainBoard() {
             // Given
-            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").contents("내용").board(null).build();
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").contents("내용").name(null).build();
 
             // When
             ResponseEntity<Message> response = articleService.addArticle("testUser", articleRequestDto);
@@ -77,11 +77,11 @@ class ArticleServiceTest {
     @DisplayName("게시물 등록 실패 테스트")
     class addArticleTest_fail {
 
-        @DisplayName("등록하려는 게시글의 제목이 없다.")
+        @DisplayName("등록하려는 게시글의 제목이 없다. (null)")
         @Test
         void addArticle_hasNotTitle() {
             // Given
-            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().contents("내용").board(Board.MAIN).build();
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().contents("내용").name(Board.MAIN).build();
 
             // When
             CustomException exception = assertThrows(CustomException.class, () -> articleService.addArticle("testUser", articleRequestDto));
@@ -90,11 +90,37 @@ class ArticleServiceTest {
             assertEquals(exception.getErrorCode(), NON_TITLE);
         }
 
-        @DisplayName("등록하려는 게시글의 내용이 없다.")
+        @DisplayName("등록하려는 게시글의 제목이 없다. (no String)")
+        @Test
+        void addArticle_hasNotTitle_noString() {
+            // Given
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("").contents("내용").name(Board.MAIN).build();
+
+            // When
+            CustomException exception = assertThrows(CustomException.class, () -> articleService.addArticle("testUser", articleRequestDto));
+
+            // Then
+            assertEquals(exception.getErrorCode(), NON_TITLE);
+        }
+
+        @DisplayName("등록하려는 게시글의 내용이 없다. (null)")
         @Test
         void addArticle_hasNotContents() {
             // Given
-            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").board(Board.MAIN).build();
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").name(Board.MAIN).build();
+
+            // When
+            CustomException exception = assertThrows(CustomException.class, () -> articleService.addArticle("testUser", articleRequestDto));
+
+            // Then
+            assertEquals(exception.getErrorCode(), NON_CONTENT);
+        }
+
+        @DisplayName("등록하려는 게시글의 내용이 없다. (no String)")
+        @Test
+        void addArticle_hasNotContents_noString() {
+            // Given
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").contents("").name(Board.MAIN).build();
 
             // When
             CustomException exception = assertThrows(CustomException.class, () -> articleService.addArticle("testUser", articleRequestDto));
@@ -112,7 +138,7 @@ class ArticleServiceTest {
         @Test
         void updateArticle() {
             // Given
-            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목 수정").contents("내용 수정").board(null).build();
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목 수정").contents("내용 수정").name(null).build();
             when(articleRepository.findById(anyLong())).thenReturn(Optional.of(article));
 
             // When
