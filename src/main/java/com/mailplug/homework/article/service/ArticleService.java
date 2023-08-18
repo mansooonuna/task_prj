@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+
 import static com.mailplug.homework.article.exception.ErrorCode.*;
 
 @Service
@@ -25,7 +27,7 @@ public class ArticleService {
 
     // 게시물 목록 조회
     public ResponseEntity<Message> getArticles(Board name, Pageable pageable, String searchKeyword) {
-        Page<Article> articleList;
+        List<Article> articleList;
 
         // 게시판 선택하지 않으면 기본 게시판 글을 조회한다
         if (name == null) name = Board.MAIN;

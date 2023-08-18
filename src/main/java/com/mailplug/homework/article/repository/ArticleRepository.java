@@ -8,10 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query(value = "SELECT a FROM Article a WHERE a.name = :name ")
-    Page<Article> findAllByBoard(@Param("name") Board name, Pageable pageable);
+    List<Article> findAllByBoard(@Param("name") Board name, Pageable pageable);
 
     @Query(value = "SELECT a FROM Article a WHERE a.name = :name AND a.title LIKE %:searchKeyword%")
-    Page<Article> findAllByBoardAndSearchKeyword(Board name, String searchKeyword, Pageable pageable);
+    List<Article> findAllByBoardAndSearchKeyword(Board name, String searchKeyword, Pageable pageable);
 }
