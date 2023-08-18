@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 @Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class ArticleRequestDto {
     @Size(max = 100, message = "글의 제목은 100자 이내로 작성해주세요.")
     private String title;
