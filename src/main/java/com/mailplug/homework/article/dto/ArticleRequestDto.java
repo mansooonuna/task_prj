@@ -4,7 +4,6 @@ import com.mailplug.homework.article.entity.Board;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Size;
 
