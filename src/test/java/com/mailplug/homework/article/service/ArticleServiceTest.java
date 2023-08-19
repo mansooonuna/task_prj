@@ -167,6 +167,62 @@ class ArticleServiceTest {
             // Then
             assertEquals(exception.getErrorCode(), NOT_AUTHORIZED_USER);
         }
+
+        @DisplayName("등록하려는 게시글의 제목이 없다. (null)")
+        @Test
+        void updateArticle_hasNotTitle() {
+            // Given
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().contents("내용").name(Board.MAIN).build();
+            when(articleRepository.findById(anyLong())).thenReturn(Optional.of(article));
+
+            // When
+            CustomException exception = assertThrows(CustomException.class, () -> articleService.updateArticle(article.getId(), "testUser", articleRequestDto));
+
+            // Then
+            assertEquals(exception.getErrorCode(), NON_TITLE);
+        }
+
+        @DisplayName("등록하려는 게시글의 제목이 없다. (no String)")
+        @Test
+        void updateArticle_hasNotTitle_noString() {
+            // Given
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("").contents("내용").name(Board.MAIN).build();
+            when(articleRepository.findById(anyLong())).thenReturn(Optional.of(article));
+
+            // When
+            CustomException exception = assertThrows(CustomException.class, () -> articleService.updateArticle(article.getId(), "testUser", articleRequestDto));
+
+            // Then
+            assertEquals(exception.getErrorCode(), NON_TITLE);
+        }
+
+        @DisplayName("등록하려는 게시글의 내용이 없다. (null)")
+        @Test
+        void updateArticle_hasNotContents() {
+            // Given
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").name(Board.MAIN).build();
+            when(articleRepository.findById(anyLong())).thenReturn(Optional.of(article));
+
+            // When
+            CustomException exception = assertThrows(CustomException.class, () -> articleService.updateArticle(article.getId(), "testUser", articleRequestDto));
+
+            // Then
+            assertEquals(exception.getErrorCode(), NON_CONTENT);
+        }
+
+        @DisplayName("등록하려는 게시글의 내용이 없다.(no String)")
+        @Test
+        void updateArticle_hasNotContents_noString() {
+            // Given
+            ArticleRequestDto articleRequestDto = ArticleRequestDto.builder().title("제목").contents("").name(Board.MAIN).build();
+            when(articleRepository.findById(anyLong())).thenReturn(Optional.of(article));
+
+            // When
+            CustomException exception = assertThrows(CustomException.class, () -> articleService.updateArticle(article.getId(), "testUser", articleRequestDto));
+
+            // Then
+            assertEquals(exception.getErrorCode(), NON_CONTENT);
+        }
     }
 
 
