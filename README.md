@@ -1,4 +1,4 @@
-## 💻 CRUD 게시판 프로젝트
+# 💻 CRUD 게시판 프로젝트
 
 ### ✏️ 프로젝트 구조 소개
 
@@ -51,8 +51,19 @@ Spring Boot
     <li>zip 파일을 압축해제 하여 DB를 연결하고 실행합니다. (파일 실행시 더미 데이터가 생성되어 DB에 삽입됩니다.)</li>
 </ol>
 
+### ✅ Test Code
+코드 커버리지 77% 구현 완료
+<br>
+<div align=center>
+  <img width="800" src="https://github.com/mansooonuna/task_prj/assets/102853354/8853677b-8484-4593-a91b-90b0191b8985">
+</div>
+
+
+
 ### ✅ API 명세
-<img width="100%" src="https://github.com/mansooonuna/task_prj/assets/102853354/91644dd3-d3d8-430e-8924-b8921aeedb9c">
+<div align=center>
+<img width="800" src="https://github.com/mansooonuna/task_prj/assets/102853354/91644dd3-d3d8-430e-8924-b8921aeedb9c">
+</div>
 
 ### 👀 주요 기능 한눈에 보기
 <details>
@@ -168,5 +179,4 @@ Spring Boot
     <img src="https://github.com/mansooonuna/task_prj/assets/102853354/e6afad67-df7e-41f7-bf50-1c2d3c8daa49">
     </div>
 </details>
-
 
