@@ -45,7 +45,7 @@ Spring Boot
         <summary>데이터베이스의 이름을 'board'로 설정하여 생성해주세요.</summary>
         <br/>
         <div align=center>
-        <img width="100%" src='https://github.com/mansooonuna/task_prj/assets/102853354/96221ac2-e075-44c3-a3bd-586673e39235' width='800px'>
+        <img width="100%" src='https://github.com/mansooonuna/task_prj/assets/102853354/96221ac2-e075-44c3-a3bd-586673e39235'>
         </div>
         </details>
     <li>zip 파일을 압축해제 하여 DB를 연결하고 실행합니다. (파일 실행시 더미 데이터가 생성되어 DB에 삽입됩니다.)</li>
@@ -146,7 +146,7 @@ Spring Boot
     </div>
 <br/>
 
-<li>게시판을 선택하고, 검색 키워드도 함께 param으로 넘겨주면 해당 게시판의 검색된 게시글이 조회됩니다. 검색 시 쿼리문에 LIKE를 사용하여 해당 키워드가 제목에 포함된 게시글은 모두 조회욉니다.</li>
+<li>게시판을 선택하고, 검색 키워드도 함께 param으로 넘겨주면 해당 게시판의 검색된 게시글이 조회됩니다. 검색 시 쿼리문에 LIKE를 사용하여 해당 키워드가 제목에 포함된 게시글은 모두 조회됩니다.</li>
     <div align=center>
     <img src="https://github.com/mansooonuna/task_prj/assets/102853354/cee8f4c2-b87b-4962-8068-2ee862ba7fc1">
     </div>
@@ -158,10 +158,10 @@ Spring Boot
 <summary>공통 예외처리</summary>
 <br/>
 <li>해당 게시글이 존재하지 않을 경우 예외처리 진행하였습니다.</li>
-    <div align="center">
-    <img src="https://github.com/mansooonuna/task_prj/assets/102853354/77714e18-d067-4f2b-bbca-1641c2eaf991" width='800px'>
+    <div align=center>
+    <img src="https://github.com/mansooonuna/task_prj/assets/102853354/77714e18-d067-4f2b-bbca-1641c2eaf991">
     </div>
-
+<br>
 <li>게시글은 작성자만 수정,삭제할 수 있도록 예외처리 진행했습니다. </li>
     <div align="center">
     <img src="https://github.com/mansooonuna/task_prj/assets/102853354/1e04620e-e2c5-4a61-bff1-7b9c2ecbb980">
