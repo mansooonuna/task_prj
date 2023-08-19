@@ -76,6 +76,9 @@ public class ArticleService {
 
         String title = requestDto.getTitle();
         String contents = requestDto.getContents();
+        if (title == null || title.equals("")) throw new CustomException(NON_TITLE);
+        if (contents == null || contents.equals("")) throw new CustomException(NON_CONTENT);
+
         article.update(title, contents);
         return new ResponseEntity<>(new Message("게시글 수정 성공", article), HttpStatus.OK);
     }
