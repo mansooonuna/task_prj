@@ -16,16 +16,20 @@ public class DummyInitializer {
 
     @PostConstruct
     public void init() {
-        Article test1 = Article.builder().title("제목1").contents("내용1").userId("testUser").name(Board.FREE).build();
-        Article test2 = Article.builder().title("제목2").contents("내용2").userId("testUser").name(Board.FREE).build();
-        Article test3 = Article.builder().title("제목3").contents("내용3").userId("testUser").name(Board.FREE).build();
-        Article test4 = Article.builder().title("제목4").contents("내용4").userId("testUser").name(Board.FREE).build();
-        Article test5 = Article.builder().title("제목5").contents("내용5").userId("testUser").name(Board.FREE).build();
+        for (int i = 1; i <= 10; i++) {
+            Article article = Article.builder().title("제목" + i).contents("메인게시판 텍스트 내용" + i).userId("testUser").name(Board.MAIN).build();
+            articleRepository.save(article);
+        }
 
-        articleRepository.save(test1);
-        articleRepository.save(test2);
-        articleRepository.save(test3);
-        articleRepository.save(test4);
-        articleRepository.save(test5);
+        for (int i = 11; i <= 20; i++) {
+            Article article = Article.builder().title("제목" + i).contents("자유게시판 텍스트 내용" + i).userId("testUser").name(Board.FREE).build();
+            articleRepository.save(article);
+        }
+
+        for (int i = 21; i <=30 ; i++) {
+            Article article = Article.builder().title("제목" + i).contents("공지게시판 텍스트 내용" + i).userId("testUser").name(Board.NOTICE).build();
+            articleRepository.save(article);
+        }
+
     }
 }
