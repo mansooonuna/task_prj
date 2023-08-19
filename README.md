@@ -63,6 +63,12 @@ Spring Boot
     <img src='https://github.com/mansooonuna/task_prj/assets/102853354/076191a0-238c-481d-adee-eb5ffa272d9c' >
     </div>
 <br/>
+
+<li>게시글 조회 시 마다 조회수가 업데이트 됩니다.</li>
+    <div align=center>
+    <img src='https://github.com/mansooonuna/task_prj/assets/102853354/7f91d96e-e92a-48cd-a210-258fcb61e457' >
+    </div>
+<br/>
 </details>
 
 ***
