@@ -1,4 +1,4 @@
-package com.mailplug.homework.article.exception;
+package com.mailplug.homework.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -3,11 +3,10 @@ package com.mailplug.homework.article.service;
 import com.mailplug.homework.article.dto.ArticleRequestDto;
 import com.mailplug.homework.article.entity.Article;
 import com.mailplug.homework.article.entity.Board;
-import com.mailplug.homework.article.exception.CustomException;
+import com.mailplug.homework.exception.CustomException;
 import com.mailplug.homework.article.repository.ArticleRepository;
 import com.mailplug.homework.util.Message;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 
-import static com.mailplug.homework.article.exception.ErrorCode.*;
+import static com.mailplug.homework.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor

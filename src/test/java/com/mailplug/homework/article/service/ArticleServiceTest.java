@@ -3,7 +3,7 @@ package com.mailplug.homework.article.service;
 import com.mailplug.homework.article.dto.ArticleRequestDto;
 import com.mailplug.homework.article.entity.Article;
 import com.mailplug.homework.article.entity.Board;
-import com.mailplug.homework.article.exception.CustomException;
+import com.mailplug.homework.exception.CustomException;
 import com.mailplug.homework.article.repository.ArticleRepository;
 import com.mailplug.homework.util.Message;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
-import static com.mailplug.homework.article.exception.ErrorCode.*;
+import static com.mailplug.homework.exception.ErrorCode.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;

@@ -1,6 +1,6 @@
-package com.mailplug.homework.article.exception;
+package com.mailplug.homework.exception;
+
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -21,24 +21,24 @@ public class GlobalExceptionHandler {
 
     // Valid 예외 핸들러
     @ExceptionHandler(value = {BindException.class})
-    public ResponseEntity<ErrorResponse> handleBindException(BindException  ex) {
+    public ResponseEntity<ErrorResponse> handleBindException(BindException ex) {
         BindingResult bindingResult = ex.getBindingResult();
 
         StringBuilder sb = new StringBuilder();
-        for ( FieldError fieldError : bindingResult.getFieldErrors()) {
+        for (FieldError fieldError : bindingResult.getFieldErrors()) {
             sb.append(fieldError.getDefaultMessage());
         }
         return ErrorResponse.toResponseEntityValid(sb.toString(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(Exception e){
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
         e.printStackTrace();
         return ErrorResponse.toResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
     }
 
     @ExceptionHandler(value = RuntimeException.class)
-    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e){
+    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
         e.printStackTrace();
         return ErrorResponse.toResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
     }
