@@ -52,10 +52,10 @@ Spring Boot
 </ol>
 
 ### ✅ Test Code
-코드 커버리지 77% 구현 완료
+코드 커버리지 94% 구현 완료
 <br>
 <div align=center>
-  <img width="800" src="https://github.com/mansooonuna/task_prj/assets/102853354/8853677b-8484-4593-a91b-90b0191b8985">
+  <img width="800" src="https://github.com/mansooonuna/task_prj/assets/102853354/953a35b8-a39e-47c8-8ddc-ca4c3325af3f">
 </div>
 
 
