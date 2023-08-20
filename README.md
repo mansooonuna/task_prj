@@ -24,7 +24,8 @@
 <li>Java 17</li>
 <li>Gradle 8.2.1</li>
 <li>Spring Boot 2.7.12</li>
-<li>MySQL 8.0.33</li>
+<li>H2 Database</li>
+<li>MySQL Driver</li>
 </ul>
 
 ### ❓ 기술 세부 스택
@@ -39,17 +40,16 @@ Spring Boot
 </ul>
 
 ### ✅ 빌드 및 실행 방법
-<ol>
-    <li>로컬 환경에서 사용할 MySql DB가 필요합니다.</li>
+<ul>
+    <li>zip 파일을 압축해제 하여 실행합니다. (파일 실행시 더미 데이터가 생성되어 DB에 삽입됩니다.)</li>
         <details>
-        <summary>데이터베이스의 이름을 'board'로 설정하여 생성해주세요.</summary>
+        <summary>h2-console로 접속하면 데이터를 확인할 수 있습니다.</summary>
         <br/>
         <div align=center>
-        <img width="100%" src='https://github.com/mansooonuna/task_prj/assets/102853354/96221ac2-e075-44c3-a3bd-586673e39235'>
+        <img width="100%" src='https://github.com/mansooonuna/task_prj/assets/102853354/6328d752-6c26-4dc1-b323-a50617fba237'>
         </div>
         </details>
-    <li>zip 파일을 압축해제 하여 DB를 연결하고 실행합니다. (파일 실행시 더미 데이터가 생성되어 DB에 삽입됩니다.)</li>
-</ol>
+</ul>
 
 ### ✅ Test Code
 코드 커버리지 94% 구현 완료
